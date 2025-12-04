@@ -123,7 +123,7 @@ export default function Properties() {
         Premium Properties
       </h1>
       <div className="flex justify-center">
-        <p className="float-animation text-xs sm:text-sm md:text-base max-w-3xl mx-auto leading-relaxed bg-orange-500 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
+        <p className="float-animation text-xs sm:text-sm md:text-base max-w-3xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
           Discover our curated selection of luxury homes, commercial spaces, and prime land plots across Ghana&apos;s most desirable locations.
         </p>
       </div>

@@ -91,7 +91,7 @@ export default function Services() {
         </p>
       </div>
       <div className="flex justify-center">
-        <p className="float-animation text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed bg-orange-500 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
+        <p className="float-animation text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
           From finding your dream property to transforming it into a luxurious masterpiece, 
           we provide end-to-end solutions for your living spaces.
         </p>
