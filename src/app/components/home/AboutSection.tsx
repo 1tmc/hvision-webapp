@@ -16,7 +16,7 @@ export default function AboutSections() {
                 <div className="relative">
                   <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                      src="/h5.png" 
+                      src="/home-image.jpg" 
                       alt="H-Vision Properties" 
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -31,7 +31,7 @@ export default function AboutSections() {
                   </div>
                   
                   {/* Top-right overlay image */}
-                  <div className="absolute -top-4 -right-4 w-44 h-44 md:w-32 md:h-32 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                  <div className="absolute -top-4 -right-4 w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                     <img 
                       src="/hvision-family.jpg" 
                       alt="Modern Interior" 

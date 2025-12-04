@@ -43,7 +43,7 @@ const Logo = ({ size = "default" }: { size?: "default" | "small" | "large" }) =>
       src="/joint-icon.png" 
       alt="H-Vision Properties Logo" 
       className={`transition-all duration-300 object-contain ${
-        size === "small" ? "w-10 h-10" : 
+        size === "small" ? "w-12 h-12" : 
         size === "large" ? "w-24 h-24 md:w-28 md:h-28" : 
         "w-16 h-16 md:w-20 md:h-20"
       }`}
@@ -148,10 +148,10 @@ export default function Header() {
 
       {/* -------------------- MOBILE HEADER (default view) -------------------- */}
       <div className={`md:hidden flex items-center justify-between max-w-7xl mx-auto px-4 transition-all duration-500 ${
-        isSticky ? 'py-2' : 'py-3'
+        isSticky ? 'py-1' : 'py-2'
       }`}>
         <div className="flex items-center">
-          <Logo size="large" />
+          <Logo size="small" />
         </div>
         
         <MobileMenuToggle isOpen={isMenuOpen} onClick={toggleMenu} />
@@ -162,7 +162,16 @@ export default function Header() {
         className={`md:hidden fixed top-0 right-0 h-full w-3/4 max-w-sm bg-black/95 backdrop-blur-md shadow-2xl transition-all duration-500 ease-in-out z-40
           ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
       >
-        
+        {/* Close button - Single X icon */}
+        <button 
+          onClick={toggleMenu}
+          className="absolute top-6 right-6 p-2 text-white hover:text-[color:var(--brand)] transition-colors duration-300"
+          aria-label="Close menu"
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
         {/* Navigation Links */}
         <nav className="flex flex-col items-start justify-start h-full pt-24 p-8 space-y-6">
