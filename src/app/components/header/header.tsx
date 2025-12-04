@@ -37,12 +37,16 @@ const MobileMenuToggle = ({ isOpen, onClick }: MobileMenuToggleProps) => (
 );
 
 // Logo component (acts as a Link to the homepage)
-const Logo = () => (
+const Logo = ({ size = "default" }: { size?: "default" | "small" | "large" }) => (
   <Link href="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-[color:var(--brand)] rounded">
     <img 
       src="/joint-icon.png" 
       alt="H-Vision Properties Logo" 
-      className="w-16 h-16 md:w-20 md:h-20 object-contain transition-all duration-300"
+      className={`transition-all duration-300 object-contain ${
+        size === "small" ? "w-10 h-10" : 
+        size === "large" ? "w-24 h-24 md:w-28 md:h-28" : 
+        "w-16 h-16 md:w-20 md:h-20"
+      }`}
       onError={(e) => {
         const target = e.target as HTMLImageElement;
         target.onerror = null;
@@ -114,7 +118,7 @@ export default function Header() {
 
         {/* Center Logo */}
         <div className="flex justify-center">
-          <Logo />
+          <Logo size="large"/>
         </div>
 
         {/* Right Navigation & Contact Button (Justified to the left, towards the center logo) */}
@@ -147,7 +151,7 @@ export default function Header() {
         isSticky ? 'py-2' : 'py-3'
       }`}>
         <div className="flex items-center">
-          <Logo />
+          <Logo size="large" />
         </div>
         
         <MobileMenuToggle isOpen={isMenuOpen} onClick={toggleMenu} />
@@ -158,17 +162,9 @@ export default function Header() {
         className={`md:hidden fixed top-0 right-0 h-full w-3/4 max-w-sm bg-black/95 backdrop-blur-md shadow-2xl transition-all duration-500 ease-in-out z-40
           ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
       >
-        {/* Close button - Single X icon */}
-        {/* <button 
-          onClick={toggleMenu}
-          className="absolute top-6 right-6 p-2 text-white hover:text-[color:var(--brand)] transition-colors duration-300"
-          aria-label="Close menu"
-        >
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button> */}
+        
 
+        {/* Navigation Links */}
         <nav className="flex flex-col items-start justify-start h-full pt-24 p-8 space-y-6">
           {[...leftLinks, ...rightLinks].map(link => (
             <Link 
@@ -190,6 +186,16 @@ export default function Header() {
             Contact
           </Link>
         </nav>
+
+        {/* Company Logo at the bottom of mobile menu - BIGGER SIZE */}
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center px-4">
+          <div className="flex flex-col items-center">
+            <Logo size="large" />
+            <p className="text-white text-base mt-3 font-bold">H-Vision Properties</p>
+            <p className="text-white text-base mt-1 font-bold">Brandivera Luxury Interiors</p>
+            <p className="text-gray-400 text-sm mt-2 font-medium">Building Dreams, Creating Legacies</p>
+          </div>
+        </div>
       </div>
 
       {/* Overlay when mobile menu is open */}
