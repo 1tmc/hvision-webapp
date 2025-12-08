@@ -11,6 +11,8 @@ export default function Properties() {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<number>>(new Set());
+  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(new Set());
 
   // Filter properties based on selected category
   const filteredProperties = selectedCategory === 'all' 
@@ -47,6 +49,37 @@ export default function Properties() {
     setIsGalleryOpen(false);
     setSelectedProperty(null);
     setSelectedImageIndex(0);
+  };
+
+  // Function to toggle description expansion
+  const toggleDescription = (propertyId: number) => {
+    setExpandedDescriptions(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(propertyId)) {
+        newSet.delete(propertyId);
+      } else {
+        newSet.add(propertyId);
+      }
+      return newSet;
+    });
+  };
+
+  // Function to toggle features expansion
+  const toggleFeatures = (propertyId: number) => {
+    setExpandedFeatures(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(propertyId)) {
+        newSet.delete(propertyId);
+      } else {
+        newSet.add(propertyId);
+      }
+      return newSet;
+    });
+  };
+
+  // Function to check if description should be truncated
+  const shouldTruncateDescription = (description: string) => {
+    return description.length > 100;
   };
 
   // Category colors for the filter buttons
@@ -282,13 +315,23 @@ export default function Properties() {
                           </div>
                         </div>
 
-                        <p className="text-gray-700 mb-4 line-clamp-2 text-sm md:text-base leading-relaxed">
-                          {property.description}
+                        <p className="text-gray-700 mb-4 text-sm md:text-base leading-relaxed">
+                          {expandedDescriptions.has(property.id) || !shouldTruncateDescription(property.description)
+                            ? property.description
+                            : `${property.description.substring(0, 100)}...`}
+                          {shouldTruncateDescription(property.description) && (
+                            <button
+                              onClick={() => toggleDescription(property.id)}
+                              className="text-orange-500 hover:text-orange-600 font-medium ml-1 transition-colors duration-200"
+                            >
+                              {expandedDescriptions.has(property.id) ? 'Read Less' : 'Read More'}
+                            </button>
+                          )}
                         </p>
 
                         {/* Features */}
                         <div className="flex flex-wrap gap-1 md:gap-2 mb-4 md:mb-6">
-                          {property.features.slice(0, 4).map((feature, idx) => (
+                          {(expandedFeatures.has(property.id) ? property.features : property.features.slice(0, 4)).map((feature, idx) => (
                             <span 
                               key={idx} 
                               className="px-2 py-1 bg-orange-50 text-orange-700 text-xs md:text-sm rounded border border-orange-200 font-medium"
@@ -297,9 +340,12 @@ export default function Properties() {
                             </span>
                           ))}
                           {property.features.length > 4 && (
-                            <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs md:text-sm rounded border border-gray-200">
-                              +{property.features.length - 4} more
-                            </span>
+                            <button
+                              onClick={() => toggleFeatures(property.id)}
+                              className="px-2 py-1 bg-gray-100 text-gray-600 hover:bg-gray-200 text-xs md:text-sm rounded border border-gray-200 transition-colors duration-200 font-medium"
+                            >
+                              {expandedFeatures.has(property.id) ? 'Show Less' : `+${property.features.length - 4} more`}
+                            </button>
                           )}
                         </div>
 

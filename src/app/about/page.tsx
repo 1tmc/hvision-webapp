@@ -52,56 +52,132 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-white">
-     {/* Hero Banner */}
-<AnimateOnScroll>
-  <section 
-    className="relative text-white pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden"
-    style={{
-      backgroundImage: 'url("/page-header.png")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backdropFilter: 'blur(40px)'
-    }}
-  >
-    {/* Dark overlay with blur effect */}
-    <div className="absolute inset-0 bg-black/40 backdrop-blur-2"></div>
-    
-    {/* Add CSS animation */}
-    <style jsx>{`
-      @keyframes floatUpDown {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-      .float-animation {
-        animation: floatUpDown 3s ease-in-out infinite;
-      }
-    `}</style>
-    
-    <div className="relative max-w-7xl mx-auto px-4 text-center z-10">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white">
-        About Us
-      </h1>
-      <div className="flex justify-center mb-6">
-        <p className="text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto leading-relaxed font-light text-white opacity-90">
-          Building Dreams, Creating Legacies
-        </p>
-      </div>
-      <div className="flex justify-center">
-        <p className="float-animation text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
-          Your trusted partner in real estate and luxury interior design, transforming visions into reality.
-        </p>
-      </div>
-    </div>
-  </section>
-</AnimateOnScroll>
+      {/* Hero Banner */}
+      <AnimateOnScroll>
+        <section 
+          className="relative text-white pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden"
+          style={{
+            backgroundImage: 'url("/page-header.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backdropFilter: 'blur(40px)'
+          }}
+        >
+          {/* Dark overlay with blur effect */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-2"></div>
+          
+          <div className="relative max-w-7xl mx-auto px-4 text-center z-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white">
+              About Us
+            </h1>
+            <div className="flex justify-center mb-6">
+              <p className="text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto leading-relaxed font-light text-white opacity-90">
+                Building Dreams, Creating Legacies
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <p className="float-animation text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
+                Your trusted partner in real estate and luxury interior design, transforming visions into reality.
+              </p>
+            </div>
+          </div>
+        </section>
+      </AnimateOnScroll>
+
+      {/* Meet Me - Founder & CEO Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimateOnScroll>
+            <div className="items-center">
+              {/* Founder's Message */}
+              <div className="space-y-6">
+                <div className="text-center px-4 py-2 rounded-full font-semibold text-white" style={{backgroundColor: '#f59234'}}>
+                  Meet Our Founder
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight text-center">
+                  MS BRANDY, <span style={{color: '#f59234'}}>FOUNDER & CEO</span>
+                </h2>
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 text-center">
+                  H-VISION PROPERTIES & BRANDIVERA LUXURY INTERIORS
+                </h3>
+                
+                <div className="space-y-4 text-lg text-gray-700 leading-relaxed text-center">
+                  <p className="italic border-l-4 pl-6 py-2" style={{borderColor: '#f59234'}}>
+                    &quot;I built these two brands from pure passion, hard work, and a commitment to excellence.&quot;
+                  </p>
+                  
+                  <p>
+                    H-Vision Properties and Brandivera Luxury Interiors are more than businesses to me - they are my vision of what luxury living should look like in Ghana.
+                  </p>
+                  
+                  <p>
+                    I believe in quality, honesty, and delivering results that speak for themselves. Whether it&apos;s property, interiors, or custom furniture, I put my heart and standards into everything my team and I create.
+                  </p>
+                  
+                  <p className="font-semibold text-gray-900">
+                    If you choose us, just know you&apos;re choosing a brand that doesn&apos;t settle for average.
+                  </p>
+                  
+                  {/* Animated 3D cards with different backgrounds */}
+                  <style jsx>{`
+                    @keyframes floatSlow {
+                      0%, 100% {
+                        transform: translateY(0) perspective(500px) rotateX(0);
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                      }
+                      50% {
+                        transform: translateY(-8px) perspective(500px) rotateX(2deg);
+                        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+                      }
+                    }
+                    .float-card {
+                      animation: floatSlow 4s ease-in-out infinite;
+                      transform-style: preserve-3d;
+                    }
+                    .float-card:nth-child(2) {
+                      animation-delay: 0.2s;
+                    }
+                    .float-card:nth-child(3) {
+                      animation-delay: 0.4s;
+                    }
+                  `}</style>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6">
+                    <div className="float-card text-center p-5 rounded-xl border border-white/20 backdrop-blur-sm"
+                         style={{
+                           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                           boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3), 0 4px 8px rgba(0, 0, 0, 0.1)',
+                           transform: 'perspective(500px) rotateX(0deg)',
+                         }}>
+                      <div className="text-white font-bold text-lg">We create beauty.</div>
+                    </div>
+                    <div className="float-card text-center p-5 rounded-xl border border-white/20 backdrop-blur-sm"
+                         style={{
+                           background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                           boxShadow: '0 10px 20px rgba(240, 147, 251, 0.3), 0 4px 8px rgba(0, 0, 0, 0.1)',
+                           transform: 'perspective(500px) rotateX(0deg)',
+                         }}>
+                      <div className="text-white font-bold text-lg">We create comfort.</div>
+                    </div>
+                    <div className="float-card text-center p-5 rounded-xl border border-white/20 backdrop-blur-sm"
+                         style={{
+                           background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                           boxShadow: '0 10px 20px rgba(79, 172, 254, 0.3), 0 4px 8px rgba(0, 0, 0, 0.1)',
+                           transform: 'perspective(500px) rotateX(0deg)',
+                         }}>
+                      <div className="text-white font-bold text-lg">We create luxury that lasts.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
 
       {/* Who We Are Section */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
@@ -162,7 +238,7 @@ export default function About() {
       </section>
 
       {/* Mission, Vision & Values Section */}
-      <section className="py-16 md:py-20 bg-gray-50">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <AnimateOnScroll>
             <div className="text-center mb-12 md:mb-16">
@@ -237,7 +313,7 @@ export default function About() {
       </section>
 
       {/* H-Vision & Brandivera Relationship */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image */}

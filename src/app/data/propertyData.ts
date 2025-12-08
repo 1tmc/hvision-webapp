@@ -21,7 +21,7 @@ export const properties: Property[] = [
     category: "sale",
     type: "Residential",
     location: "East Legon Hills, Accra",
-    price: "$450,000",
+    price: "$320,000",
     bedrooms: 5,
     bathrooms: 6,
     size: "4500 sq ft",
@@ -39,7 +39,134 @@ export const properties: Property[] = [
     ]
   },
   {
+    id: 14,
+    title: "Executive 4-Bedroom Luxury Home East Legon Hills",
+    category: "sale",
+    type: "Residential",
+    location: "East Legon Hills, Accra",
+    price: "$370,000",
+    bedrooms: 4,
+    bathrooms: 4,
+    size: "3700 sq ft",
+    description: "Where elegance meets confidence, this 4-bedroom executive home in East Legon Hills is crafted for buyers who want more than just a house. Every space speaks luxury, every finish makes a statement, and the prime location delivers lasting value.",
+    features: [
+      "Executive Finishes",
+      "Luxury Interior Design",
+      "Spacious Living Areas",
+      "Modern Kitchen",
+      "Balconies",
+      "Walk-in Closets",
+      "Fully Air-Conditioned",
+      "Secure Neighborhood",
+      "Ample Parking"
+    ],
+    images: [
+      "/properties/ww1.jpeg",
+      "/properties/ww2.jpeg",
+      "/properties/ww3.jpeg",
+      "/properties/ww4.jpeg",
+      "/properties/ww5.jpeg",
+      "/properties/ww6.jpeg",
+      "/properties/ww7.jpeg",
+      "/properties/ww8.jpeg",
+      "/properties/ww9.jpeg",
+      "/properties/ww10.jpeg",
+      "/properties/ww11.jpeg",
+      "/properties/ww12.jpeg",
+      "/properties/ww13.jpeg",
+      "/properties/ww14.jpeg",
+      "/properties/ww15.jpeg",
+      "/properties/ww16.jpeg"
+    ]
+  },
+  {
+    id: 15,
+    title: "4-Bedroom Luxury Home with Maiden Quarters & Pool",
+    category: "sale",
+    type: "Residential",
+    location: "East Legon, Accra",
+    price: "$440,000 / $480,000",
+    bedrooms: 4,
+    bathrooms: 5,
+    size: "4000 sq ft",
+    description: "Stunning 4-bedroom luxury home with all rooms ensuite, a 1-bedroom maiden quarters, German-style kitchen, penthouse master suite, automated gate, CCTV security system, and optional swimming pool located in prime East Legon. With pool is 480,000 and without pool is 440,000",
+    features: [
+      "All Ensuite Bedrooms",
+      "Maiden Quarters",
+      "German-Style Kitchen",
+      "Penthouse Master Suite",
+      "Guest Washroom",
+      "Family Lounge",
+      "Automated Gate",
+      "CCTV Security",
+      "Swimming Pool (Optional)"
+    ],
+    images: [
+      "/properties/www1.jpeg",
+      "/properties/www2.jpeg",
+      "/properties/www3.jpeg",
+      "/properties/www4.jpeg",
+      "/properties/www5.jpeg",
+      "/properties/www6.jpeg",
+      "/properties/www7.jpeg",
+      "/properties/www8.jpeg",
+      "/properties/www9.jpeg"
+    ]
+  },
+
+
+  {
     id: 2,
+    title: "Luxury 4-Bedroom Modern Duplex East Legon Hills",
+    category: "sale",
+    type: "Residential",
+    location: "East Legon Hills, Accra",
+    price: "$260,000",
+    bedrooms: 4,
+    bathrooms: 4,
+    size: "3500 sq ft",
+    description: "Luxury 4-bedroom modern duplex with smart home system, fully air-conditioned rooms, landscaped surroundings, and spacious compound located in a serene and secure neighborhood in East Legon Hills.",
+    features: [
+      "Modern Architectural Design",
+      "Smart Home System",
+      "Spacious Compound",
+      "Landscaped Garden",
+      "Fully Air-Conditioned",
+      "Titled Land",
+      "Secure Neighborhood",
+      "Parking Space"
+    ],
+    images: [
+      "/properties/w6.jpeg",
+      "/properties/w1.jpeg",
+      "/properties/w2.jpeg",
+      "/properties/w3.jpeg",
+      "/properties/w4.jpeg",
+      "/properties/w5.jpeg",
+      "/properties/w7.jpeg",
+      "/properties/w8.jpeg",
+      "/properties/w9.jpeg",
+      "/properties/w10.jpeg",
+      "/properties/w11.jpeg",
+      "/properties/w12.jpeg",
+      "/properties/w13.jpeg",
+      "/properties/w14.jpeg",
+      "/properties/w15.jpeg",
+      "/properties/w16.jpeg",
+      "/properties/w17.jpeg",
+      "/properties/w18.jpeg",
+      "/properties/w19.jpeg",
+      "/properties/w20.jpeg",
+      "/properties/w21.jpeg",
+      "/properties/w22.jpeg",
+      "/properties/w23.jpeg",
+      "/properties/w24.jpeg",
+      "/properties/w25.jpeg",
+      "/properties/w26.jpeg"
+    ]
+  },
+  {
+    id: 13,
     title: "Executive Apartment Airport Residential",
     category: "rent",
     type: "Residential",
@@ -220,7 +347,8 @@ export const properties: Property[] = [
     images: [
       "/properties/x9.jpg"
     ]
-  }
+  },
+
 ];
 
 export const categories = [
