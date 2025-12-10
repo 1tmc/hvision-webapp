@@ -1,18 +1,49 @@
-// app/properties/page.tsx
 'use client';
 
-import React, { useState } from 'react';
-import { properties, categories, Property } from '../data/propertyData';
+import React, { useState, useEffect } from 'react';
 import ImageGalleryModal from '../components/modals/ImageGalleryModal';
 import AnimateOnScroll from '../components/animation/AnimateOnScroll';
+import { getAllProperties, getCategories } from '@/app/lib/sanity.api';
+import { Property } from '@/app/types/property';
+
+interface Category {
+  id: string;
+  name: string;
+  count: number;
+}
 
 export default function Properties() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<number>>(new Set());
-  const [expandedFeatures, setExpandedFeatures] = useState<Set<number>>(new Set());
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
+  const [expandedFeatures, setExpandedFeatures] = useState<Set<string>>(new Set());
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]); // Fixed this line
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const [propertiesData, categoriesData] = await Promise.all([
+          getAllProperties(),
+          getCategories()
+        ]);
+        setProperties(propertiesData);
+        setCategories(categoriesData);
+      } catch (err) {
+        setError('Failed to load properties. Please try again later.');
+        console.error('Error fetching properties:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
   // Filter properties based on selected category
   const filteredProperties = selectedCategory === 'all' 
@@ -52,7 +83,7 @@ export default function Properties() {
   };
 
   // Function to toggle description expansion
-  const toggleDescription = (propertyId: number) => {
+  const toggleDescription = (propertyId: string) => {
     setExpandedDescriptions(prev => {
       const newSet = new Set(prev);
       if (newSet.has(propertyId)) {
@@ -65,7 +96,7 @@ export default function Properties() {
   };
 
   // Function to toggle features expansion
-  const toggleFeatures = (propertyId: number) => {
+  const toggleFeatures = (propertyId: string) => {
     setExpandedFeatures(prev => {
       const newSet = new Set(prev);
       if (newSet.has(propertyId)) {
@@ -80,6 +111,14 @@ export default function Properties() {
   // Function to check if description should be truncated
   const shouldTruncateDescription = (description: string) => {
     return description.length > 100;
+  };
+
+  // Helper for safe image URLs
+  const getSafeImageUrl = (url: string | undefined, fallbackIndex: number) => {
+    if (!url) {
+      return `https://placehold.co/600x400/e5e7eb/6b7280?text=Property+${fallbackIndex + 1}`;
+    }
+    return url;
   };
 
   // Category colors for the filter buttons
@@ -108,6 +147,37 @@ export default function Properties() {
     return activeColors[categoryId as keyof typeof activeColors];
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading properties...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">Error Loading Properties</h3>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Image Gallery Modal */}
@@ -121,48 +191,34 @@ export default function Properties() {
         />
       )}
 
-    {/* Hero Banner with Image Background */}
-    <AnimateOnScroll>
-  <section 
-    className="relative text-white pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden"
-    style={{
-      backgroundImage: 'url("/page-header.png")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backdropFilter: 'blur(40px)'
-    }}
-  >
-    {/* Dark overlay with blur effect */}
-    <div className="absolute inset-0 bg-black/40 backdrop-blur-2"></div>
-    
-    {/* Add CSS animation */}
-    <style jsx>{`
-      @keyframes floatUpDown {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-      .float-animation {
-        animation: floatUpDown 3s ease-in-out infinite;
-      }
-    `}</style>
-    
-    <div className="relative max-w-7xl mx-auto px-4 text-center z-10">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
-        Premium Properties
-      </h1>
-      <div className="flex justify-center">
-        <p className="float-animation text-xs sm:text-sm md:text-base max-w-3xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
-          Discover our curated selection of luxury homes, commercial spaces, and prime land plots across Ghana&apos;s most desirable locations.
-        </p>
-      </div>
-    </div>
-  </section>
-</AnimateOnScroll>
+      {/* Hero Banner with Image Background */}
+      <AnimateOnScroll>
+        <section 
+          className="relative text-white pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden"
+          style={{
+            backgroundImage: 'url("/page-header.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backdropFilter: 'blur(40px)'
+          }}
+        >
+          {/* Dark overlay with blur effect */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-2"></div>
+          
+          <div className="relative max-w-7xl mx-auto px-4 text-center z-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
+              Premium Properties
+            </h1>
+            <div className="flex justify-center">
+              <p className="float-animation text-xs sm:text-sm md:text-base max-w-3xl mx-auto leading-relaxed bg-orange-450 text-white px-5 py-3 md:px-6 md:py-4 rounded-full inline-block shadow-lg" style={{ boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.1)' }}>
+                Discover our curated selection of luxury homes, commercial spaces, and prime land plots across Ghana&apos;s most desirable locations.
+              </p>
+            </div>
+          </div>
+        </section>
+      </AnimateOnScroll>
+
       {/* Category Filter */}
       <AnimateOnScroll delay={0.1}>
         <section className="py-6 md:py-8 bg-gray-50 border-b">
@@ -214,7 +270,7 @@ export default function Properties() {
                         style={{ position: 'relative', overflow: 'hidden' }}
                       >
                         <img
-                          src={property.images[0]}
+                          src={getSafeImageUrl(property.images[0], index)}
                           alt={property.title}
                           style={{
                             width: '100%',
@@ -227,7 +283,7 @@ export default function Properties() {
                           }}
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = 'https://placehold.co/600x400/e5e7eb/6b7280?text=Property+Image';
+                            target.src = `https://placehold.co/600x400/e5e7eb/6b7280?text=Property+${index + 1}`;
                           }}
                         />
                         
@@ -413,6 +469,20 @@ export default function Properties() {
           </div>
         </section>
       </AnimateOnScroll>
+
+      <style jsx>{`
+        @keyframes floatUpDown {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        .float-animation {
+          animation: floatUpDown 3s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }
