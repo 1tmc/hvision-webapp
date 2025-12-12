@@ -2,10 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    serverComponentsExternalPackages: ['jsdom'],
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = [...(config.externals || []), 'jsdom'];
+    }
+    return config;
   },
-  // This is important for Sanity Studio
   transpilePackages: ['next-sanity', '@sanity/vision'],
 };
 
